@@ -25,13 +25,13 @@ provided file in chosen storage and on success return:
 ___
 TODO-list:
 
-[x] Make core - upload, view, basic transforms
-[ ] Implement filesystem cache
-[ ] Dockerize it!
-[ ] New URL for images from external sources
-[ ] Redis, (memcached?) caches
-[ ] Environment setup: choose cache, storage, disable upload, etc...
-[ ] Smart crop
+- [x] Make core - upload, view, basic transforms
+- [ ] Implement filesystem cache
+- [ ] Dockerize it!
+- [ ] New URL for images from external sources
+- [ ] Redis, (memcached?) caches
+- [ ] Environment setup: choose cache, storage, disable upload, etc...
+- [ ] Smart crop
 
 Optional:
-[ ] Images filters
+- [ ] Images filters
