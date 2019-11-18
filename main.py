@@ -41,7 +41,7 @@ def view_image(image_hash_and_operations):
                 'status': 'error',
                 'message': 'bad operations: {0}'.format(operations)
             }, 400
-        default_cache.store_image(image, operations)
+        default_cache.store_image(image, image_hash, operations)
 
     return send_file(io.BytesIO(image.make_blob()), mimetype=image.mimetype)
 

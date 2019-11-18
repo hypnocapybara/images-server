@@ -6,5 +6,5 @@ class BaseCache:
         raise NotImplemented
 
     @staticmethod
-    def store_image(image, operations: str):
+    def store_image(image, image_hash, operations: str):
         raise NotImplemented

@@ -26,7 +26,7 @@ ___
 TODO-list:
 
 - [x] Make core - upload, view, basic transforms
-- [ ] Implement filesystem cache
+- [x] Implement filesystem cache
 - [ ] Dockerize it!
 - [ ] New URL for images from external sources
 - [ ] Redis, (memcached?) caches
