@@ -1,0 +1,8 @@
+version: '3'
+services:
+  web:
+    build: ./
+    volumes:
+      - ./uploads:/app/uploads
+    ports:
+      - "5555:80"

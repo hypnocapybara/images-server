@@ -27,7 +27,8 @@ TODO-list:
 
 - [x] Make core - upload, view, basic transforms
 - [x] Implement filesystem cache
-- [ ] Dockerize it!
+- [x] Dockerize it!
+- [ ] Publish docker image
 - [ ] New URL for images from external sources
 - [ ] Redis, (memcached?) caches
 - [ ] Environment setup: choose cache, storage, disable upload, etc...

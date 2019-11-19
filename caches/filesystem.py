@@ -13,6 +13,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 class FileSystemCache(BaseCache):
     @staticmethod
     def get_image(image_hash: str, operations: str) -> Optional[Image]:
+        if not operations:
+            return None
+
         directory = image_hash[:2]
         operations_hash = hashlib.md5(operations.encode('utf-8')).hexdigest()
         filename = image_hash[2:] + '-' + operations_hash
