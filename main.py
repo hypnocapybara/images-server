@@ -1,4 +1,7 @@
 import io
+import hashlib
+from urllib.request import urlopen
+
 from flask import Flask, request, send_file
 from wand.image import Image
 
@@ -55,3 +58,33 @@ def upload():
             'status': 'success',
             'hash': image_hash
         }
+
+
+@app.route('/external', methods=['GET'])
+def external():
+    url = request.args.get('url')
+    operations = request.args.get('operations')
+    assert url and operations
+
+    reset_cache = request.args.get('reset_cache') == '1'
+    image_hash = hashlib.sha1(url.encode('utf-8')).hexdigest()
+
+    if not reset_cache:
+        image = default_cache.get_image(image_hash, operations)
+        if image:
+            return send_file(io.BytesIO(image.make_blob()), mimetype=image.mimetype)
+
+    response = urlopen(url)
+    f = io.BytesIO(response.read())
+
+    with Image(file=f) as image:
+        if operations:
+            image = process_image(image, operations)
+            if not image:
+                return {
+                    'status': 'error',
+                    'message': 'bad operations: {0}'.format(operations)
+                }, 400
+            default_cache.store_image(image, image_hash, operations)
+
+        return send_file(io.BytesIO(image.make_blob()), mimetype=image.mimetype)
