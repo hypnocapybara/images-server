@@ -4,6 +4,7 @@ from urllib.request import urlopen
 
 from flask import Flask, request, send_file
 from wand.image import Image
+from wand.exceptions import WandException
 
 from storages import default_storage
 from caches import default_cache
@@ -51,12 +52,25 @@ def view_image(image_hash_and_operations):
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    f = request.files['file']
-    with Image(file=f) as image:
-        image_hash = default_storage.store_image(image)
+    if 'file' not in request.files:
         return {
-            'status': 'success',
-            'hash': image_hash
+            'status': 'error',
+            'message': 'no file provided'
+        }
+
+    f = request.files['file']
+
+    try:
+        with Image(file=f) as image:
+            image_hash = default_storage.store_image(image)
+            return {
+                'status': 'success',
+                'hash': image_hash
+            }
+    except WandException:
+        return {
+            'status': 'error',
+            'message': 'image processing error'
         }
 
 
