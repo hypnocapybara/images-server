@@ -4,8 +4,23 @@ resize, rotate images on-fly.
 
 Has modular architecture with different storage and caches available.
  
-Still WIP, but the core already works.
+### Usage
+Just use this image in your docker-compose:
+```yaml
+version: '3'
+services:
+  web:
+    image: hypnocapybara/images-server
+    volumes:
+      - ./uploads:/app/uploads
+    ports:
+      - "5000:80"
+```
 
+And it goes to 5000 port
+
+
+### Operations
 Has following operations:
 
 1. `POST /upload` with `file` parameter. Will save 

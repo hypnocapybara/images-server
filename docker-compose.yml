@@ -5,4 +5,4 @@ services:
     volumes:
       - ./uploads:/app/uploads
     ports:
-      - "5555:80"
+      - "5000:80"
