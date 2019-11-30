@@ -85,7 +85,7 @@ TODO-list:
 - [x] Dockerize it!
 - [x] Publish docker image
 - [x] New URL for images from external sources
-- ~~[ ] Redis, (memcached?) caches~~ Bad idea. Just use NGINX as cache
+- [x] ~~Redis, (memcached?) caches~~ Bad idea. Just use NGINX as cache
 - [ ] Environment setup: choose cache, storage, disable upload, etc...
 - [x] Delete images
 - [ ] Tests
