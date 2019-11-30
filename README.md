@@ -77,6 +77,22 @@ provided file in chosen storage and on success return:
     But pay attention, that with this param, the image will be 
     always downloaded, that may slow down the request.
 
+7. Delete image: `DELETE /image/<hash>`
+
+    response with code 200:
+    ```json
+    {
+    "status": "success"
+    }
+    ```
+    or with code = 404, if image is not exists:
+    ```json
+    {
+    "status": "error",
+    "message": "file not found"
+    }
+    ```
+
 ___
 TODO-list:
 
