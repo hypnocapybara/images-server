@@ -1,5 +1,6 @@
 import os
 import hashlib
+import glob
 from typing import Optional
 
 from wand.image import Image
@@ -37,3 +38,11 @@ class FileSystemCache(BaseCache):
 
         full_path = os.path.join(upload_dir, filename)
         image.save(filename=full_path)
+
+    @staticmethod
+    def delete_image(image_hash: str):
+        directory = image_hash[:2]
+        filename = image_hash[2:] + '-*'
+        upload_dir = os.path.join(BASE_DIR, 'uploads', 'cache', directory, filename)
+        for filename in glob.glob(upload_dir):
+            os.remove(filename)

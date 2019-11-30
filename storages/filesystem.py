@@ -40,3 +40,14 @@ class FileSystemStorage(BaseStorage):
         full_path = os.path.join(upload_dir, filename)
         image.save(filename=full_path)
         return image_hash
+
+    @staticmethod
+    def delete_image(image_hash: str):
+        directory = image_hash[:2]
+        filename = image_hash[2:]
+        upload_file = os.path.join(BASE_DIR, 'uploads', directory, filename)
+        result = os.path.exists(upload_file)
+        if result:
+            os.remove(upload_file)
+
+        return result

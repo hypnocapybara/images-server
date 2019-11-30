@@ -19,7 +19,7 @@ def hello_world():
     return 'Hello, World!'
 
 
-@app.route('/image/<path:image_hash_and_operations>')
+@app.route('/image/<path:image_hash_and_operations>', methods=['GET'])
 def view_image(image_hash_and_operations):
     if '/' in image_hash_and_operations:
         image_hash, operations = image_hash_and_operations.split('/', 1)
@@ -56,7 +56,7 @@ def upload():
         return {
             'status': 'error',
             'message': 'no file provided'
-        }
+        }, 400
 
     f = request.files['file']
 
@@ -71,7 +71,22 @@ def upload():
         return {
             'status': 'error',
             'message': 'image processing error'
+        }, 400
+
+
+@app.route('/image/<path:image_hash>', methods=['DELETE'])
+def delete_image(image_hash):
+    default_cache.delete_image(image_hash)
+    deleted = default_storage.delete_image(image_hash)
+    if deleted:
+        return {
+            'status': 'success'
         }
+    else:
+        return {
+            'status': 'error',
+            'message': 'file not found'
+        }, 404
 
 
 @app.route('/external', methods=['GET'])

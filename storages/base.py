@@ -11,3 +11,7 @@ class BaseStorage:
     @staticmethod
     def store_image(image: Image) -> str:
         raise NotImplemented
+
+    @staticmethod
+    def delete_image(image_hash):
+        raise NotImplemented
